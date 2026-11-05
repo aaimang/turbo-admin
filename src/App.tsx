@@ -27,6 +27,7 @@ import { ConsolePage } from '#/pages/ConsolePage';
 import { ContentPage } from '#/pages/content/ContentPage';
 import { CurrencyLogPage } from '#/pages/CurrencyLogPage';
 import { DashboardPage } from '#/pages/DashboardPage';
+import { DatabasePage } from '#/pages/DatabasePage';
 import { LibraryPage } from '#/pages/gamedata/LibraryPage';
 import { MediaLibraryPage } from '#/pages/gamedata/MediaLibraryPage';
 import { PublishPage } from '#/pages/gamedata/PublishPage';
@@ -144,6 +145,7 @@ export const App = () => (
             <Route path="campaigns/:id?" element={<CampaignsPage />} />
             <Route path="content/:tab?" element={<ContentPage />} />
             <Route path="settings/:tab?" element={<SettingsPage />} />
+            <Route path="database" element={<DatabasePage />} />
             <Route path="plugins" element={<PluginsPage />} />
             <Route path="plugins/schedule" element={<PluginSchedulePage />} />
             <Route path="plugins/ai" element={<PluginAiPage />} />

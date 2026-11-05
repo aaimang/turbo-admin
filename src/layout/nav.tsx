@@ -1,4 +1,4 @@
-import { Activity, AppWindow, Armchair, BellRing, Bug, CalendarClock, CalendarDays, ChartColumn, CloudDownload, Coins, Disc3, DoorOpen, Flag, FunnelX, Gauge, History, House, ImageIcon, Images, KeyRound, Landmark, Languages, Layers, Mail, MessageCircle, MessagesSquare, Milestone, MonitorSmartphone, PackagePlus, Palette, Plug, Puzzle, ScrollText, Send, Shield, ShieldCheck, SlidersHorizontal, SquareTerminal, Stamp, Store, SwatchBook, Ticket, Timer, TriangleAlert, Type, UserRound, Users } from 'lucide-react';
+import { Activity, AppWindow, Armchair, BellRing, Bug, CalendarClock, CalendarDays, ChartColumn, CloudDownload, Coins, DatabaseBackup, Disc3, DoorOpen, Flag, FunnelX, Gauge, History, House, ImageIcon, Images, KeyRound, Landmark, Languages, Layers, Mail, MessageCircle, MessagesSquare, Milestone, MonitorSmartphone, PackagePlus, Palette, Plug, Puzzle, ScrollText, Send, Shield, ShieldCheck, SlidersHorizontal, SquareTerminal, Stamp, Store, SwatchBook, Ticket, Timer, TriangleAlert, Type, UserRound, Users } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useLocation } from 'react-router';
 
@@ -7,7 +7,7 @@ import { useMe } from '#/api/queries';
 import type { MeResponse } from '#/api/types';
 import type { TabItem } from '#/components/Tabs';
 
-type Need = keyof Pick<MeResponse, 'canViewRooms' | 'canViewPlayers' | 'canViewPermissions' | 'canViewCommandLog' | 'canViewChatlog' | 'canViewCatalog' | 'canViewGamedata' | 'canViewSettings' | 'canViewContent' | 'canViewPlugins' | 'canResetPasskeys' | 'canManageRewardTracks' | 'canManageCampaigns' | 'canHandleReports' | 'canViewMessages' | 'canViewTelemetry' | 'canViewApprovals'>;
+type Need = keyof Pick<MeResponse, 'canViewRooms' | 'canViewPlayers' | 'canViewPermissions' | 'canViewCommandLog' | 'canViewChatlog' | 'canViewCatalog' | 'canViewGamedata' | 'canViewSettings' | 'canViewContent' | 'canViewPlugins' | 'canResetPasskeys' | 'canManageRewardTracks' | 'canManageCampaigns' | 'canHandleReports' | 'canViewMessages' | 'canViewTelemetry' | 'canViewApprovals' | 'canBackupDatabase'>;
 
 /** One page of the panel: where `g` and its letter go, and what the search offers by name. */
 export interface NavItem {
@@ -69,6 +69,7 @@ const PAGES = {
     roomVisits: { to: '/room-visits', label: 'Room visits', icon: <DoorOpen />, end: false, needs: 'canViewPlayers' },
     permissionLog: { to: '/permission-log', label: 'Permission log', icon: <History />, end: false, needs: 'canViewPermissions' },
     settings: { to: '/settings', label: 'Settings', icon: <SlidersHorizontal />, end: false, key: 'e', needs: 'canViewSettings' },
+    database: { to: '/database', label: 'Database', icon: <DatabaseBackup />, end: false, needs: 'canBackupDatabase', words: 'backup sql dump export download tables mysql' },
     plugins: { to: '/plugins', label: 'Plugins', icon: <Plug />, end: true, key: 'i', needs: 'canViewPlugins' },
     pluginSchedule: { to: '/plugins/schedule', label: 'Schedule', icon: <CalendarClock />, end: false, needs: 'canViewPlugins' },
     pluginAi: { to: '/plugins/ai', label: 'AI', icon: <MessagesSquare />, end: false, needs: 'canViewPlugins' },
@@ -166,6 +167,7 @@ const SECTIONS: NavSection[] = [
         label: 'Server',
         entries: [
             { label: 'Settings', icon: <SlidersHorizontal />, pages: [ 'settings' ], hint: 'How the server is set up' },
+            { label: 'Database', icon: <DatabaseBackup />, pages: [ 'database' ], hint: 'Back up tables and download them as SQL' },
             PLUGINS,
             { label: 'Console', icon: <SquareTerminal />, pages: [ 'console' ], hint: 'Run the hotel\'s commands' },
         ],

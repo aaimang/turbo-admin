@@ -51,6 +51,8 @@ export interface MeResponse {
     canManageCampaigns: boolean;
     /** Holds `admin.approvals.view`: may see the approvals inbox; deciding needs each request's node. */
     canViewApprovals: boolean;
+    /** Holds `admin.database.backup`: may back up the database's tables and download them as SQL. */
+    canBackupDatabase: boolean;
 }
 
 export interface DashboardRoom {
