@@ -190,6 +190,17 @@ export interface ShownEntry extends NavEntry {
 const PLUGIN_ICONS: Record<string, ReactNode> = { bug: <Bug />, puzzle: <Puzzle />, scroll: <ScrollText />, users: <Users /> };
 
 /**
+ * A plugin page's icon: one of the names above, or a picture of its own (a `data:image/...` URI or
+ * an https address), drawn as pixel art like the hotel's; any other name is the plug.
+ */
+const pluginIcon = (icon: string | null): ReactNode => {
+    if (icon && (icon.startsWith('data:image/') || icon.startsWith('https://')))
+        return <img src={icon} alt="" className="size-5 object-contain [image-rendering:pixelated]" />;
+
+    return PLUGIN_ICONS[icon ?? ''] ?? <Plug />;
+};
+
+/**
  * The pages live plugins add to the navigation, those the viewer may see: under Plugins, below the
  * panel's own, and gone as soon as the plugin is reloaded without them, turned off or taken away.
  */
@@ -198,7 +209,7 @@ const usePluginEntries = (): ShownEntry[] => {
 
     return (plugins ?? []).flatMap(plugin => plugin.pages.filter(page => page.nav).map((page) => {
         const to = `/plugin/${plugin.key}/${page.id}`;
-        const icon = PLUGIN_ICONS[page.icon ?? ''] ?? <Plug />;
+        const icon = pluginIcon(page.icon);
 
         return { label: page.title, icon, pages: [], hint: `From the plugin ${plugin.name}`, path: `/plugin/${plugin.key}/`, to, shown: [ { to, label: page.title, icon, end: false } ] };
     }));
